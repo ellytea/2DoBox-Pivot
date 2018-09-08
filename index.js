@@ -1,19 +1,20 @@
+//remove global var
+
 var title = $('#title-input').val();
 var body = $('#body-input').val();
 var numCards = 0;
 var qualityVariable = "swill";
 
 var newCard = function(id , title , body , quality) {
-    return '<div id="' + id + '"class="card-container"><h2 class="title-of-card">'  
-            + title +  '</h2>'
-            + '<button class="delete-button"></button>'
-            +'<p class="body-of-card">'
-            + body + '</p>'
-            + '<button class="upvote"></button>' 
-            + '<button class="downvote"></button>' 
-            + '<p class="quality">' + 'quality:' + '<span class="qualityVariable">' + quality + '</span>' + '</p>'
-            + '<hr>' 
-            + '</div>';
+    return `<div id="${id}" class="card-container"> 
+            <h2 class="title-of-card"> ${title} </h2>
+            <button class="delete-button"></button>
+            <p class="body-of-card">
+             ${body}  </p>
+             <button class="upvote"></button> 
+             <button class="downvote"></button> 
+             <p class="quality"> quality:  <span class="qualityVariable">swill</span> </p>
+             </div>`;
 };
 
 function cardObject() {
@@ -34,9 +35,9 @@ var localStoreCard = function() {
     var cardString = JSON.stringify(cardObject());
     localStorage.setItem('card' + numCards  , cardString);
 }
-
+// 
 $('.save-btn').on('click', function(event) {
-    event.preventDefault();
+    event.preventDefault(event);
     if ($('#title-input').val() === "" || $('#body-input').val() === "") {
        return false;
     };  
@@ -46,6 +47,7 @@ $('.save-btn').on('click', function(event) {
     localStoreCard();
     $('form')[0].reset();
 });
+// 
 
 $(".bottom-box").on('click', function(event){
     var currentQuality = $($(event.target).siblings('p.quality').children()[0]).text().trim();
@@ -93,6 +95,8 @@ $(".bottom-box").on('click', function(event){
         localStorage.removeItem(cardHTMLId);
     }
 });
+
+
       
 
 
