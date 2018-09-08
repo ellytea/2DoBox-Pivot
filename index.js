@@ -1,4 +1,3 @@
-//remove global var
 
 var title = $('#title-input').val();
 var body = $('#body-input').val();
@@ -7,13 +6,13 @@ var qualityVariable = "swill";
 
 var newCard = function(id , title , body , quality) {
     return `<div id="${id}" class="card-container"> 
-            <h2 class="title-of-card"> ${title} </h2>
+            <h2 class="title-of-card">${title}</h2>
             <button class="delete-button"></button>
             <p class="body-of-card">
-             ${body}  </p>
+             ${body}</p>
              <button class="upvote"></button> 
              <button class="downvote"></button> 
-             <p class="quality"> quality:  <span class="qualityVariable">swill</span> </p>
+             <p class="quality"> quality:<span class="qualityVariable">swill</span></p>
              </div>`;
 };
 
@@ -25,15 +24,16 @@ function cardObject() {
     };
 }
 
-$.each(localStorage, function(key) {
-    var cardData = JSON.parse(this);
+for (var i = 0; i < localStorage.length; i++) {
     numCards++;
+    var key = localStorage.key(i);
+    var cardData = JSON.parse(localStorage.getItem(key));
     $( ".bottom-box" ).prepend(newCard(key, cardData.title, cardData.body, cardData.quality));
-});
+}
 
 var localStoreCard = function() {
     var cardString = JSON.stringify(cardObject());
-    localStorage.setItem('card' + numCards  , cardString);
+    localStorage.setItem('card' + numCards , cardString);
 }
 // 
 $('.save-btn').on('click', function(event) {
