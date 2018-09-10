@@ -17,7 +17,6 @@ header {
     flex-direction: column;
     text-align: center;
     background-color: #e5f3f2;
-    height: 37vh;
 }
 
 h1{
@@ -60,6 +59,7 @@ textarea {
     font-size: 1.5em;
     height: 30px;
     width: 500px;
+    margin-bottom: 20px;
 }
 
 .save-btn:hover {
@@ -98,11 +98,15 @@ button {
     font-family: 'Open Sans', sans-serif;
 }
 
+.card-Btn {
+    height: 25px;
+    width: 25px;
+    background: transparent;
+}
+
 .upvote {
     background-image: url(./images/upvote.svg);
-    height: 25px;
     margin: 0px 5px 15px 0px; 
-    width: 25px;
 }
 
 .upvote:hover {
@@ -111,8 +115,6 @@ button {
 
 .downvote {
     background-image: url(./images/downvote.svg);
-    height: 25px;
-    width: 25px;
 }
 
 .downvote:hover {
@@ -121,11 +123,9 @@ button {
 
 .delete-button {
     background-image: url(./images/delete.svg);
-    height: 25px;
     position: absolute;
     right: 10px;
     top: 15px;
-    width: 25px;
 }
 
 .delete-button:hover {
@@ -170,7 +170,4 @@ button {
     outline: none;
     }
 
-    header {
-     height: 43vh;
-    }
-}
+   }
