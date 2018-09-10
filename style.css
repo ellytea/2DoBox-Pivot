@@ -17,7 +17,7 @@ header {
     flex-direction: column;
     text-align: center;
     background-color: #e5f3f2;
-    height: 320px;
+    height: 37vh;
 }
 
 h1{
@@ -32,8 +32,21 @@ h1{
 
 input {
     height: 30px;
-    width: 45%;
+    width: 500px;
     font-size: 1.5em;
+    display: block;
+    margin: 12px auto 12px;
+}
+
+textarea {
+    resize: vertical;
+    display: block;
+    margin: 0px auto 12px;
+    width: 500px;
+    border: solid 1px #D1D3D4;
+    font-size: 1.5em;
+    height: 1.45em;
+    outline: none;
 }
 
 #search-input {
@@ -46,7 +59,7 @@ input {
     color: #fff;
     font-size: 1.5em;
     height: 30px;
-    width: 45.5%;
+    width: 500px;
 }
 
 .save-btn:hover {
@@ -67,7 +80,7 @@ p {
 .card-container {
     margin: auto;
     position: relative;
-    width: 400px;
+    width: 500px;
     border-bottom: solid 1px #d1d3d4;
 }
 
@@ -75,11 +88,21 @@ button {
     border: none;
 }
 
+.quality {
+    display: inline;
+    font-family: serif;
+    margin-left: 15px;
+}
+
+.qualityVariable {
+    font-family: 'Open Sans', sans-serif;
+}
+
 .upvote {
     background-image: url(./images/upvote.svg);
-    height: 20px;
-    margin-right: 5px; 
-    width: 20px;
+    height: 25px;
+    margin: 0px 5px 15px 0px; 
+    width: 25px;
 }
 
 .upvote:hover {
@@ -88,9 +111,8 @@ button {
 
 .downvote {
     background-image: url(./images/downvote.svg);
-    height: 20px;
-    margin-right: 5px; 
-    width: 20px;
+    height: 25px;
+    width: 25px;
 }
 
 .downvote:hover {
@@ -99,11 +121,11 @@ button {
 
 .delete-button {
     background-image: url(./images/delete.svg);
-    height: 20px;
+    height: 25px;
     position: absolute;
     right: 10px;
     top: 15px;
-    width: 20px;
+    width: 25px;
 }
 
 .delete-button:hover {
@@ -112,13 +134,43 @@ button {
 
 /*media queries*/
 
-@media(max-width: 640px){
+@media(max-width: 640px) {
 
     .card-container {
-        width: 85%;
+        width: 400px;
+    }
+    input {
+        width: 400px;
+    }
+    .save-btn {
+        width: 400px;
     }
 
-    #search-input {
-        border: solid #999 1px;
+    textarea {
+    width: 400px;
+    height: 1.45em;
+    outline: none;
+    }
+}
+
+@media(max-width: 450px) {
+     .card-container {
+        width: 300px;
+    }
+    input {
+        width: 300px;
+    }
+    .save-btn {
+        width: 300px;
+    }
+
+    textarea {
+    width: 300px;
+    height: 4em;
+    outline: none;
+    }
+
+    header {
+     height: 43vh;
     }
 }
