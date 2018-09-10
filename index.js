@@ -6,7 +6,7 @@ callIdeas();
     this.id = $.now();
     this.title = title;
     this.body = body;
-    this.quality = 'swill';
+    this.quality = 0;
  }
 
  function createIdea(title, body) {
@@ -35,7 +35,9 @@ function createCard(event){
     // clearInputs();
 }
 
-function newCard(id , title , body , quality) {
+function newCard(id , title , body, quality) {
+    var qualityOptions = ['swill','plausible','genius'];
+    console.log(quality);
     return `<div id="${id}" class="card-container"> 
             <h2 class="title-of-card">${title}</h2>
             <button class="delete-button"></button>
@@ -43,17 +45,31 @@ function newCard(id , title , body , quality) {
              ${body}</p>
              <button class="upvote"></button> 
              <button class="downvote"></button> 
-             <p class="quality">quality:${quality}</p>
+             <p class="quality">quality:${qualityOptions[quality]}</p>
              </div>`;
 }
 
-
-function saveBtn(){
+function saveBtn(event){
+    event.preventDefault();
     if ($('#title-input').val() === "" || $('#body-input').val() === "") {
        $('.save-btn').prop('disabled', true);
     } else {
         $('.save-btn').prop('disabled', false);
     }
+}
+
+function increaseQuality(qualityOptions, quality){
+    if (quality < qualityOptions.length){
+    quality++
+
+    }
+}
+
+function decreaseQuality(){
+    // if(){
+    // quality--
+        
+    // }
 }
 
 // function clearInputs(){
@@ -67,47 +83,51 @@ $(".bottom-box").on('click', function(event){
     var currentQuality = $($(event.target).siblings('p.quality').children()[0]).text().trim();
     var qualityVariable;
 
-    if (event.target.className === "upvote" || event.target.className === "downvote"){
+    if (event.target.className === "upvote"){
+        increaseQuality();
+    } else if (event.target.className === "downvote"){
+        decreaseQuality();
+    }
 
-        if (event.target.className === "upvote" && currentQuality === "plausible"){
-            qualityVariable = "genius";
-            $($(event.target).siblings('p.quality').children()[0]).text(qualityVariable);
+        // if (event.target.className === "upvote" && currentQuality === "plausible"){
+        //     qualityVariable = "genius";
+        //     $($(event.target).siblings('p.quality').children()[0]).text(qualityVariable);
                
-        } else if (event.target.className === "upvote" && currentQuality === "swill") {
-            qualityVariable = "plausible";
-            $($(event.target).siblings('p.quality').children()[0]).text(qualityVariable);
+        // } else if (event.target.className === "upvote" && currentQuality === "swill") {
+        //     qualityVariable = "plausible";
+        //     $($(event.target).siblings('p.quality').children()[0]).text(qualityVariable);
                
-        } else if (event.target.className === "downvote" && currentQuality === "plausible") {
-            qualityVariable = "swill"
-            $($(event.target).siblings('p.quality').children()[0]).text(qualityVariable);
+        // } else if (event.target.className === "downvote" && currentQuality === "plausible") {
+        //     qualityVariable = "swill"
+        //     $($(event.target).siblings('p.quality').children()[0]).text(qualityVariable);
 
-        } else if (event.target.className === "downvote" && currentQuality === "genius") {
-            qualityVariable = "plausible"
-            $($(event.target).siblings('p.quality').children()[0]).text(qualityVariable);
+        // } else if (event.target.className === "downvote" && currentQuality === "genius") {
+        //     qualityVariable = "plausible"
+        //     $($(event.target).siblings('p.quality').children()[0]).text(qualityVariable);
 
-        } else if (event.target.className === "downvote" && currentQuality === "swill") {
-            qualityVariable = "swill";
+        // } else if (event.target.className === "downvote" && currentQuality === "swill") {
+        //     qualityVariable = "swill";
         
-        } else if (event.target.className === "upvote" && currentQuality === "genius") {
-            qualityVariable = "genius";
-        }
+        // } else if (event.target.className === "upvote" && currentQuality === "genius") {
+        //     qualityVariable = "genius";
+        // }
 
-    var cardHTML = $(event.target).closest('.card-container');
-    var cardHTMLId = cardHTML[0].id;
-    var cardObjectInJSON = localStorage.getItem(cardHTMLId);
-    var cardObjectInJS = JSON.parse(cardObjectInJSON);
+    // var cardHTML = $(event.target).closest('.card-container');
+    // var cardHTMLId = cardHTML[0].id;
+    // var cardObjectInJSON = localStorage.getItem(cardHTMLId);
+    // var cardObjectInJS = JSON.parse(cardObjectInJSON);
 
-    cardObjectInJS.quality = qualityVariable;
+    // cardObjectInJS.quality = qualityVariable;
 
-    var newCardJSON = JSON.stringify(cardObjectInJS);
-    localStorage.setItem(cardHTMLId, newCardJSON);
-    }
+    // var newCardJSON = JSON.stringify(cardObjectInJS);
+    // localStorage.setItem(cardHTMLId, newCardJSON);
+    // }
    
-    else if (event.target.className === "delete-button") {
-        var cardHTML = $(event.target).closest('.card-container').remove();
-        var cardHTMLId = cardHTML[0].id;
-        localStorage.removeItem(cardHTMLId);
-    }
+    // else if (event.target.className === "delete-button") {
+    //     var cardHTML = $(event.target).closest('.card-container').remove();
+    //     var cardHTMLId = cardHTML[0].id;
+    //     localStorage.removeItem(cardHTMLId);
+    // }
 });
 
 
