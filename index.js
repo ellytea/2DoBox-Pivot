@@ -1,5 +1,6 @@
 $('.save-btn').on('click', createCard);
 $('form').on('keyup', saveBtn);
+$(".bottom-box").on('click', something);
 
 callIdeas();
 
@@ -44,7 +45,7 @@ function newCard(id , title , body, quality) {
              ${body}</p>
              <button class="upvote card-Btn"></button> 
              <button class="downvote card-Btn"></button> 
-             <p class="quality">quality:${qualityOptions[quality]}</p>
+             <p class="quality" data-number="0">quality:${qualityOptions[quality]}</p>
              </div>`;
 }
 
@@ -63,27 +64,17 @@ function checkInputs(){
        }
 }
 
-function increaseQuality(){
-    if (quality < qualityOptions.length){
-    quality++;
-    }
+function upDownVoting(){
+        var cardObject = JSON.parse(localStorage.getItem($(e.target).parent().prop('id')));
+        if ($(e.target).hasClass('upvote') && cardObject.quality < 2) {
+           cardObject.quality++; 
+        } else if ($(e.target).hasClass('downvote') && cardObject.quality > 0) {
+            cardObject.quality--;
+        }
+        $( ".bottom-box" ).prepend(newCard(cardObject.id, cardObject.title, cardObject.body, cardObject.quality));
+        localStoreCard(cardObject.id, cardObject); 
+        $(e.target).parent().remove();  
 }
-
-function decreaseQuality(){
-    if (quality > qualityOptions.length){
-    quality--; 
-    }
-}
-
-$(".bottom-box").on('click', function(e){
-    console.log('click');
-    var getQuality = $(e.target).closest('.card-container').find('.quality')[0];
-    if (e.target.className === "upvote"){
-        increaseQuality();
-    } else if (e.target.className === "downvote"){
-        decreaseQuality();
-    }
-});
 
         // if (event.target.className === "upvote" && currentQuality === "plausible"){
         //     qualityVariable = "genius";
