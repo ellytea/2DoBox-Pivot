@@ -2,25 +2,25 @@
 <html>
 <head>
     <title>ideaBox</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="style.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-    <section class="container box">
-        <article class="top-box">
-            <form>
-                <h1 class="idea">idea</h1>
-                <h1 class="box">Box</h1>
-                <input id="title-input" type="text" placeholder="Title"><br />
-                <input id="body-input" type="text" placeholder="Body"><br />  
-                <button class="save-btn">save</button disabled><br />
-            </form>
-        </article>
-        <input id="search-input" type="text" placeholder="Search">
-        <article class="bottom-box"> </article>
+    <header>
+        <h1><span class="idea">idea</span>box</h1>
+        <form>
+            <input id="title-input" type="text" placeholder="Title">
+            <textarea id="body-input" type="text" placeholder="Body"></textarea>  
+            <button class="save-btn">save</button>
+        </form>
+    </header>
+    <main>
+    <input id="search-input" type="text" placeholder="Search">
+    <section class="bottom-box"> 
     </section>
+    </main>
     <script src="./jquery/jquery-3.2.1.js" type="text/javascript"></script>
     <script src="./index.js" type="text/javascript"></script>
     <script scr="./refactor.js" type="text/javascript"></script>

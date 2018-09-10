@@ -1,106 +1,75 @@
-.container {
-    display: flex;
-    flex-direction: column;
-    font-family: 'Roboto Slab', serif;
-}
-
-.container-box {
-    margin: 0;
-}
-
+/*page basics*/
 body {
     box-sizing: border-box;
     margin: 0;
+    font-size: 16px;
+    font-family: 'Roboto Slab', serif;
 }
 
-.top-box {
-    background-color: #e5f3f2;
-    box-sizing: border-box;
-    height: 300px;
-    margin: 0;
+main {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
     text-align: center;
+    background-color: #e5f3f2;
 }
 
 h1{
     color: #6d6e71;
-    display: inline-block;
-    font-size: 275%;
-    margin-bottom:  30px;
+    font-size: 3em;
+    margin-bottom:  28px;
 }
 
 .idea {
     color: #00a79d;
 }
 
-#title-input {
-    align-items: center;
-    display: flex;
+input {
     height: 30px;
-    justify-content: space-between;
-    width: 45%;
+    width: 500px;
+    font-size: 1.5em;
+    display: block;
+    margin: 12px auto 12px;
 }
 
-#body-input {
-    align-items: center;
-    display: flex;
-    height: 30px;
-    justify-content: space-between;
-    width: 45%;
+textarea {
+    resize: vertical;
+    display: block;
+    margin: 0px auto 12px;
+    width: 500px;
+    border: solid 1px #D1D3D4;
+    font-size: 1.5em;
+    height: 1.45em;
+    outline: none;
 }
 
 #search-input {
-    height: 30px;
-    margin-top: 50px;
-    width: 45%;
+    margin: 40px auto 0px;
 }
 
 .save-btn {
     background-color: #00a79d;
     border: none;
     color: #fff;
-    font-size: 120%;
+    font-size: 1.5em;
     height: 30px;
-    width: 45.5%;
+    width: 500px;
+    margin-bottom: 20px;
 }
 
 .save-btn:hover {
     background-color: #045e55;
 }
 
-input {
-    align-items: center;
-    display: flex;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 100%;
-    justify-content: space-between;
-    margin: auto;
-}
-
-.card-container {
-    margin: auto;
-    position: relative;
-    width: 45%;
-}
-
-.card {
-    background-color: #ffffff;
-    height: auto;
-    margin: auto;
-    width: 45%;
-}
-
-.title-of-card{
-    color: #6D6E71;
-    display: inline-block;
-    font-family: 'Roboto Slab', serif;
-    font-size: 140%;
-}
-
+/*idea cards*/
 h2 {
    color: #6d6e71; 
-   display: inline-block;
-   font-family: 'Roboto Slab', serif;
-   font-size: 150%;
+   font-size: 1.5em;
 }
 
 p {
@@ -108,73 +77,97 @@ p {
     font-family: 'Open Sans', sans-serif;
 }
 
-.body-of-card{
-    color: #939598;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 100%;
+.card-container {
+    margin: auto;
+    position: relative;
+    width: 500px;
+    border-bottom: solid 1px #d1d3d4;
 }
 
 button {
-    background-color: transparent;
     border: none;
+}
+
+.quality {
+    display: inline;
+    font-family: serif;
+    margin-left: 15px;
+}
+
+.qualityVariable {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.card-Btn {
+    height: 25px;
+    width: 25px;
+    background: transparent;
 }
 
 .upvote {
     background-image: url(./images/upvote.svg);
-    background-size: cover;
-    height: 20px;
-    margin-right: 5px; 
-    width: 20px;
+    margin: 0px 5px 15px 0px; 
 }
 
 .upvote:hover {
-    background-color: transparent;
     background-image: url(./images/upvote-hover.svg);
-    background-size: cover;
-    height: 20px;
-    width: 20px;
 }
 
 .downvote {
     background-image: url(./images/downvote.svg);
-    background-size: cover;
-    height: 20px;
-    margin-right: 5px; 
-    width: 20px;
 }
 
 .downvote:hover {
     background-image: url(./images/downvote-hover.svg);
-    background-size: cover;
-    height: 20px;
-    width: 20px;
 }
 
 .delete-button {
     background-image: url(./images/delete.svg);
-    background-size: cover;
-    height: 20px;
     position: absolute;
     right: 10px;
     top: 15px;
-    width: 20px;
 }
 
 .delete-button:hover {
     background-image: url(./images/delete-hover.svg);
-    background-size: cover;
-    height: 20px;
-    width: 20px;
 }
 
-@media(max-width: 640px){
+/*media queries*/
+
+@media(max-width: 640px) {
 
     .card-container {
-        width: 85%;
+        width: 400px;
+    }
+    input {
+        width: 400px;
+    }
+    .save-btn {
+        width: 400px;
     }
 
-    #search-input {
-        border: solid #999 1px;
+    textarea {
+    width: 400px;
+    height: 1.45em;
+    outline: none;
     }
 }
 
+@media(max-width: 450px) {
+     .card-container {
+        width: 300px;
+    }
+    input {
+        width: 300px;
+    }
+    .save-btn {
+        width: 300px;
+    }
+
+    textarea {
+    width: 300px;
+    height: 4em;
+    outline: none;
+    }
+
+   }
