@@ -33,7 +33,6 @@ function createCard(e){
     var body = $('#body-input').val();
     var newIdea = createIdea(title, body);
     $( ".bottom-box" ).prepend(newCard(newIdea.id, title, body, newIdea.quality));
-    // clearInputs();
 }
 
 function newCard(id , title , body, quality) {
@@ -64,37 +63,27 @@ function checkInputs(){
        }
 }
 
-function increaseQuality(qualityOptions, quality){
+function increaseQuality(){
     if (quality < qualityOptions.length){
-    quality++
-
+    quality++;
     }
 }
 
 function decreaseQuality(){
-    // if(){
-    // quality--
-        
-    // }
+    if (quality > qualityOptions.length){
+    quality--; 
+    }
 }
 
-// function clearInputs(){
-//     $('#title-input').val('');
-//     $('#body-input').val('');
-//     $('.save-btn').prop('disabled', true);
-// }
-
-
-// $(".bottom-box").on('click', function(event){
-//     var currentQuality = $($(event.target).siblings('p.quality').children()[0]).text().trim();
-//     // var qualityVariable;
-
-//     if (event.target.className === "upvote"){
-//         increaseQuality();
-//     } else if (event.target.className === "downvote"){
-//         decreaseQuality();
-//     }
-// })
+$(".bottom-box").on('click', function(e){
+    console.log('click');
+    var getQuality = $(e.target).closest('.card-container').find('.quality')[0];
+    if (e.target.className === "upvote"){
+        increaseQuality();
+    } else if (e.target.className === "downvote"){
+        decreaseQuality();
+    }
+});
 
         // if (event.target.className === "upvote" && currentQuality === "plausible"){
         //     qualityVariable = "genius";
