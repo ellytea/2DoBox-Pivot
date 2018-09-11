@@ -123,7 +123,6 @@ function makeEditsBody(event) {
     var id = $(event.target).parent().attr('id');
     var cardData = JSON.parse(localStorage.getItem(id));
     var changeBody = $(event.target).text();
-    console.log(changeBody)
     cardData.body = changeBody;
     localStoreCard(id, cardData);
     }
