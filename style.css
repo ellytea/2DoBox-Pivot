@@ -46,6 +46,7 @@ textarea {
     font-size: 1.5em;
     height: 1.45em;
     outline: none;
+    min-height: 25px;
 }
 
 #search-input {
@@ -64,7 +65,7 @@ textarea {
 }
 
 .save-btn:hover {
-    background-color: #045e55;
+    background-color: #04BC88;
 }
 
 /*idea cards*/
@@ -134,6 +135,10 @@ button {
 }
 
 .hidden {
+    display: none;
+}
+
+.hide-card {
     display: none;
 }
 
