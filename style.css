@@ -46,6 +46,7 @@ textarea {
     font-size: 1.5em;
     height: 1.45em;
     outline: none;
+    min-height: 25px;
 }
 
 #search-input {
