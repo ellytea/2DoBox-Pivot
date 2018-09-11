@@ -16,11 +16,11 @@ header {
     display: flex;
     flex-direction: column;
     text-align: center;
-    background-color: #e5f3f2;
+    background-color:  #404040;
 }
 
 h1{
-    color: #6d6e71;
+    color: #ffffff;
     font-size: 3em;
     margin-bottom:  28px;
 }
@@ -49,7 +49,8 @@ textarea {
 }
 
 #search-input {
-    margin: 40px auto 0px;
+    margin: 30px auto 0px;
+    border: solid 1px #404040;
 }
 
 .save-btn {
@@ -58,7 +59,7 @@ textarea {
     color: #fff;
     font-size: 1.5em;
     height: 30px;
-    width: 500px;
+    width: 510px;
     margin-bottom: 20px;
 }
 
@@ -130,6 +131,10 @@ button {
 
 .delete-button:hover {
     background-image: url(./images/delete-hover.svg);
+}
+
+.hidden {
+    display: none;
 }
 
 /*media queries*/
