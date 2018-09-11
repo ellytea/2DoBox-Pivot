@@ -1,8 +1,10 @@
 $('.save-btn').on('click', createCard);
 $('form').on('keyup', saveBtn);
-$('.bottom-box').on('click', upDownVoting)
-$('.bottom-box').on('click', deleteCard)
-$('#search-input').on('keydown', searchBar);
+$('.bottom-box').on('click', upDownVoting);
+$('.bottom-box').on('click', deleteCard);
+// $('#search-input').on('keydown', searchBar);
+$('.bottom-box').on('keyup', makeEditsTitle);
+$('.bottom-box').on('keyup', makeEditsBody);
 
 
 callIdeas();
@@ -43,9 +45,9 @@ function createCard(e) {
 function newCard(id , title , body, quality) {
     var qualityOptions = ['swill','plausible','genius'];
     return `<div id="${id}" class="card-container"> 
-            <h2 class="title-of-card">${title}</h2>
+            <h2 class="title-of-card" contenteditable="true">${title}</h2>
             <button class="delete-button card-Btn"></button>
-            <p class="body-of-card">
+            <p class="body-of-card" contenteditable="true">
              ${body}</p>
              <button class="upvote card-Btn"></button> 
              <button class="downvote card-Btn"></button> 
@@ -95,6 +97,45 @@ function clearInputs() {
     $('#body-input').val('');
     $('.save-btn').attr('disabled', true);
 }
+
+function makeEditsTitle(event) {
+    if ($(event.target).hasClass('title-of-card')) {
+    var id = $(event.target).parent().attr('id');
+    var cardData = JSON.parse(localStorage.getItem(id));
+    var changeTitle = $(event.target).text();
+    cardData.title = changeTitle;
+    localStoreCard(id, cardData);
+    }
+}
+
+function makeEditsBody(event) {
+    if ($(event.target).hasClass('body-of-card')) {
+    var id = $(event.target).parent().attr('id');
+    var cardData = JSON.parse(localStorage.getItem(id));
+    var changeBody = $(event.target).text();
+    console.log(changeBody)
+    cardData.body = changeBody;
+    localStoreCard(id, cardData);
+    }
+}
+
+
+// function makeEdits() {
+//     if( $(e.target).hasClass('title-of-card') ) {
+//      var cardObject = JSON.parse(localStorage.getItem($(event.target).parent().prop('id')));
+//      $( ".card-container" ).prepend(newCard(cardObject.id, cardObject.title, cardObject.body, cardObject.quality));
+//     localStoreCard(cardObject.id, cardObject); 
+//     $(event.target).parent().remove();     
+
+
+//     if( $(e.target).hasClass('body-of-card') ) {
+//     var id = $(e.target).parent().attr('id');
+//     var cardData = JSON.parse(localStorage.getItem(localStorage.key(i)));
+//     localStoreCard(id, cardData);
+//   }
+// }
+
+
 
 // function searchBar() {
 //     var cardList = $('.card-container')
