@@ -64,7 +64,7 @@ textarea {
 }
 
 .save-btn:hover {
-    background-color: #045e55;
+    background-color: #04BC88;
 }
 
 /*idea cards*/
@@ -134,6 +134,10 @@ button {
 }
 
 .hidden {
+    display: none;
+}
+
+.hide-card {
     display: none;
 }
 
