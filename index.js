@@ -49,7 +49,7 @@ function newCard(id , title , body, quality) {
              ${body}</p>
              <button class="upvote card-Btn"></button> 
              <button class="downvote card-Btn"></button> 
-             <p class="quality" data-number="0">quality:${qualityOptions[quality]}</p>
+             <p class="quality" data-number="0">quality: ${qualityOptions[quality]}</p>
              </div>`;
 }
 
@@ -83,10 +83,11 @@ function upDownVoting() {
 function deleteCard() {
     var id = $(event.target).parent().prop('id');
     var cardList = $('.card-container')
-    $(event.target).hasClass('delete-button')
+    if ($(event.target).hasClass('delete-button')) {
         $(event.target).parent().remove();
         cardList.addClass('hidden');
         localStorage.removeItem(id);
+    }
 }
 
 function clearInputs() {
