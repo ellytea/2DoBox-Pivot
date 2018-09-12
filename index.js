@@ -6,44 +6,49 @@ $('.bottom-box').on('click', deleteCard);
 $('#search-input').on('keyup', searchBar);
 $('.bottom-box').on('keyup', makeEditsTitle);
 $('.bottom-box').on('keyup', makeEditsBody);
+$('.bottom-box').on('click', completedTask);
+$('.show-completed').on('click', showCompleted);
 
-callIdeas();
+callTasks();
 
- function IdeaObject(title, body) {
+ function TaskObject(title, body) {
     this.id = $.now();
     this.title = title;
     this.body = body;
-    this.quality = 0;
+    this.quality = 2;
+    this.completed = false;
  }
 
- function createIdea(title, body) {
-    var ideaObject = new IdeaObject(title, body);
-    localStoreCard(ideaObject.id, ideaObject);
-    return ideaObject;
+ function createTask(title, body) {
+    var taskObject = new TaskObject(title, body);
+    localStoreCard(taskObject.id, taskObject);
+    return taskObject;
  }
 
  function localStoreCard(id, cardData) {
     localStorage.setItem(id, JSON.stringify(cardData));
  }
 
-function callIdeas() {
+function callTasks() {
     for (var i = 0; i < localStorage.length; i++) {
     var cardData = JSON.parse(localStorage.getItem(localStorage.key(i)));
-    $( ".bottom-box" ).prepend(newCard(cardData.id, cardData.title, cardData.body, cardData.quality));
+    if(cardData.completed === false){
+        $( ".bottom-box" ).prepend(newCard(cardData.id, cardData.title, cardData.body, cardData.quality));
+    }
     }
 }
 
-function createCard(e) {
-    e.preventDefault();
+function createCard(event) {
+    event.preventDefault();
     var title = $('#title-input').val();
     var body = $('#body-input').val();
-    var newIdea = createIdea(title, body);
-    $( ".bottom-box" ).prepend(newCard(newIdea.id, title, body, newIdea.quality));
+    var newTask = createTask(title, body);
+    $( ".bottom-box" ).prepend(newCard(newTask.id, title, body, newTask.quality));
     clearInputs();
 }
 
 function newCard(id , title , body, quality) {
-    var qualityOptions = ['swill','plausible','genius'];
+    var qualityOptions = ['none','low','normal','high','critical'];
     return `<div id="${id}" class="card-container"> 
             <h2 class="title-of-card" contenteditable="true">${title}</h2>
             <button class="delete-button card-Btn"></button>
@@ -51,7 +56,8 @@ function newCard(id , title , body, quality) {
              ${body}</p>
              <button class="upvote card-Btn"></button> 
              <button class="downvote card-Btn"></button> 
-             <p class="quality" data-number="0">quality: ${qualityOptions[quality]}</p>
+             <p class="quality" data-number="0">importance: ${qualityOptions[quality]}</p>
+            <button class="complete-btn">Complete</button>
              </div>`;
 }
 
@@ -70,10 +76,19 @@ function checkInputs() {
        }
 }
 
+function showCompleted(){
+    for (var i = 0; i < localStorage.length; i++) {
+    var cardData = JSON.parse(localStorage.getItem(localStorage.key(i)));
+    if(cardData.completed === true){
+        $( ".bottom-box" ).prepend(newCard(cardData.id, cardData.title, cardData.body, cardData.quality));
+    }
+    }
+}
+
 function upVoting() {
     if ($(event.target).hasClass('upvote')) {
     var cardObject = JSON.parse(localStorage.getItem($(event.target).parent().prop('id')));
-    if ($(event.target).hasClass('upvote') && cardObject.quality < 2) {
+    if ($(event.target).hasClass('upvote') && cardObject.quality < 4) {
        cardObject.quality++; 
     } 
     $( ".bottom-box" ).prepend(newCard(cardObject.id, cardObject.title, cardObject.body, cardObject.quality));
@@ -99,6 +114,16 @@ function deleteCard(event) {
     var id = $(event.target).parent().attr('id');
     $(event.target).parents('.card-container').remove()
     localStorage.removeItem(id);
+    }
+}
+
+function completedTask(event){
+    if($(event.target).hasClass('complete-btn')){
+    var id = $(event.target).parent().attr('id');
+    var parsedId = JSON.parse(localStorage.getItem(id));
+    $(event.target).parents('.card-container').addClass('completed-task');
+    parsedId.completed = !parsedId.complete;
+    localStoreCard(parsedId.id, parsedId);
     }
 }
 

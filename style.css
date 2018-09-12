@@ -25,7 +25,7 @@ h1{
     margin-bottom:  28px;
 }
 
-.idea {
+.task {
     color: #00a79d;
 }
 
@@ -50,7 +50,7 @@ textarea {
 }
 
 #search-input {
-    margin: 30px auto 0px;
+    margin: 10px auto 20px auto;
     border: solid 1px #404040;
 }
 
@@ -68,7 +68,7 @@ textarea {
     background-color: #04BC88;
 }
 
-/*idea cards*/
+/*task cards*/
 h2 {
    color: #6d6e71; 
    font-size: 1.5em;
@@ -88,6 +88,25 @@ p {
 
 button {
     border: none;
+}
+
+.complete-btn {
+    background: #d1d3d4;
+    border-radius: 50px;
+    color: #fff;
+    float: right;
+    font-size: 1em;
+    margin-right: 10px;
+}
+
+.show-completed {
+    background: #d1d3d4;
+    margin: 20px auto 10px auto;
+    font-size: 1em;
+}
+
+.completed-task {
+    background: #c7edeb;
 }
 
 .quality {
