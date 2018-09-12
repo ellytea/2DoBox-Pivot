@@ -6,6 +6,7 @@ $('.bottom-box').on('click', deleteCard);
 $('#search-input').on('keyup', searchBar);
 $('.bottom-box').on('keyup', makeEditsTitle);
 $('.bottom-box').on('keyup', makeEditsBody);
+$('.bottom-box').on('click', completedTask);
 
 callIdeas();
 
@@ -14,6 +15,7 @@ callIdeas();
     this.title = title;
     this.body = body;
     this.quality = 0;
+    this.completed = false;
  }
 
  function createIdea(title, body) {
@@ -29,12 +31,14 @@ callIdeas();
 function callIdeas() {
     for (var i = 0; i < localStorage.length; i++) {
     var cardData = JSON.parse(localStorage.getItem(localStorage.key(i)));
-    $( ".bottom-box" ).prepend(newCard(cardData.id, cardData.title, cardData.body, cardData.quality));
+    if(cardData.completed === false){
+        $( ".bottom-box" ).prepend(newCard(cardData.id, cardData.title, cardData.body, cardData.quality));
+    }
     }
 }
 
-function createCard(e) {
-    e.preventDefault();
+function createCard(event) {
+    event.preventDefault();
     var title = $('#title-input').val();
     var body = $('#body-input').val();
     var newIdea = createIdea(title, body);
@@ -52,6 +56,7 @@ function newCard(id , title , body, quality) {
              <button class="upvote card-Btn"></button> 
              <button class="downvote card-Btn"></button> 
              <p class="quality" data-number="0">quality: ${qualityOptions[quality]}</p>
+            <button class="complete-btn">Complete</button>
              </div>`;
 }
 
@@ -102,11 +107,22 @@ function deleteCard(event) {
     }
 }
 
+function completedTask(event){
+    if($(event.target).hasClass('complete-btn')){
+    var id = $(event.target).parent().attr('id');
+    var parsedId = JSON.parse(localStorage.getItem(id));
+    $(event.target).parents('.card-container').toggleClass('completed-task');
+    parsedId.completed = !parsedId.complete;
+    localStoreCard(parsedId.id, parsedId);
+    }
+}
+
 function clearInputs() {
     $('#title-input').val('');
     $('#body-input').val('');
     $('.save-btn').attr('disabled', true);
 }
+
 
 function makeEditsTitle(event) {
     if ($(event.target).hasClass('title-of-card')) {

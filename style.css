@@ -90,6 +90,19 @@ button {
     border: none;
 }
 
+.complete-btn {
+    background: #d1d3d4;
+    border-radius: 50px;
+    color: #fff;
+    float: right;
+    font-size: 1em;
+    margin-right: 10px;
+}
+
+.completed-task {
+    background: #c7edeb;
+}
+
 .quality {
     display: inline;
     font-family: serif;
