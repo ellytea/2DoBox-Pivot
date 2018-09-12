@@ -15,7 +15,7 @@ callTasks();
     this.id = $.now();
     this.title = title;
     this.body = body;
-    this.quality = 0;
+    this.quality = 2;
     this.completed = false;
  }
 
@@ -48,7 +48,7 @@ function createCard(event) {
 }
 
 function newCard(id , title , body, quality) {
-    var qualityOptions = ['swill','plausible','genius'];
+    var qualityOptions = ['none','low','normal','high','critical'];
     return `<div id="${id}" class="card-container"> 
             <h2 class="title-of-card" contenteditable="true">${title}</h2>
             <button class="delete-button card-Btn"></button>
@@ -56,7 +56,7 @@ function newCard(id , title , body, quality) {
              ${body}</p>
              <button class="upvote card-Btn"></button> 
              <button class="downvote card-Btn"></button> 
-             <p class="quality" data-number="0">quality: ${qualityOptions[quality]}</p>
+             <p class="quality" data-number="0">importance: ${qualityOptions[quality]}</p>
             <button class="complete-btn">Complete</button>
              </div>`;
 }
@@ -88,7 +88,7 @@ function showCompleted(){
 function upVoting() {
     if ($(event.target).hasClass('upvote')) {
     var cardObject = JSON.parse(localStorage.getItem($(event.target).parent().prop('id')));
-    if ($(event.target).hasClass('upvote') && cardObject.quality < 2) {
+    if ($(event.target).hasClass('upvote') && cardObject.quality < 4) {
        cardObject.quality++; 
     } 
     $( ".bottom-box" ).prepend(newCard(cardObject.id, cardObject.title, cardObject.body, cardObject.quality));
