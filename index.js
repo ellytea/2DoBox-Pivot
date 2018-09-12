@@ -7,10 +7,11 @@ $('#search-input').on('keyup', searchBar);
 $('.bottom-box').on('keyup', makeEditsTitle);
 $('.bottom-box').on('keyup', makeEditsBody);
 $('.bottom-box').on('click', completedTask);
+$('.show-completed').on('click', showCompleted);
 
-callIdeas();
+callTasks();
 
- function IdeaObject(title, body) {
+ function TaskObject(title, body) {
     this.id = $.now();
     this.title = title;
     this.body = body;
@@ -18,17 +19,17 @@ callIdeas();
     this.completed = false;
  }
 
- function createIdea(title, body) {
-    var ideaObject = new IdeaObject(title, body);
-    localStoreCard(ideaObject.id, ideaObject);
-    return ideaObject;
+ function createTask(title, body) {
+    var taskObject = new TaskObject(title, body);
+    localStoreCard(taskObject.id, taskObject);
+    return taskObject;
  }
 
  function localStoreCard(id, cardData) {
     localStorage.setItem(id, JSON.stringify(cardData));
  }
 
-function callIdeas() {
+function callTasks() {
     for (var i = 0; i < localStorage.length; i++) {
     var cardData = JSON.parse(localStorage.getItem(localStorage.key(i)));
     if(cardData.completed === false){
@@ -41,8 +42,8 @@ function createCard(event) {
     event.preventDefault();
     var title = $('#title-input').val();
     var body = $('#body-input').val();
-    var newIdea = createIdea(title, body);
-    $( ".bottom-box" ).prepend(newCard(newIdea.id, title, body, newIdea.quality));
+    var newTask = createTask(title, body);
+    $( ".bottom-box" ).prepend(newCard(newTask.id, title, body, newTask.quality));
     clearInputs();
 }
 
@@ -73,6 +74,15 @@ function checkInputs() {
        } else {
         $('.save-btn').attr('disabled', false);
        }
+}
+
+function showCompleted(){
+    for (var i = 0; i < localStorage.length; i++) {
+    var cardData = JSON.parse(localStorage.getItem(localStorage.key(i)));
+    if(cardData.completed === true){
+        $( ".bottom-box" ).prepend(newCard(cardData.id, cardData.title, cardData.body, cardData.quality));
+    }
+    }
 }
 
 function upVoting() {
@@ -111,7 +121,7 @@ function completedTask(event){
     if($(event.target).hasClass('complete-btn')){
     var id = $(event.target).parent().attr('id');
     var parsedId = JSON.parse(localStorage.getItem(id));
-    $(event.target).parents('.card-container').toggleClass('completed-task');
+    $(event.target).parents('.card-container').addClass('completed-task');
     parsedId.completed = !parsedId.complete;
     localStoreCard(parsedId.id, parsedId);
     }
@@ -122,7 +132,6 @@ function clearInputs() {
     $('#body-input').val('');
     $('.save-btn').attr('disabled', true);
 }
-
 
 function makeEditsTitle(event) {
     if ($(event.target).hasClass('title-of-card')) {
