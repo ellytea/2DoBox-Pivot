@@ -15,7 +15,7 @@ callTasks();
     this.id = $.now();
     this.title = title;
     this.body = body;
-    this.quality = 2;
+    this.importance = 2;
     this.completed = false;
  }
 
@@ -33,7 +33,7 @@ function callTasks() {
     for (var i = 0; i < localStorage.length; i++) {
     var cardData = JSON.parse(localStorage.getItem(localStorage.key(i)));
     if(cardData.completed === false){
-        $( ".bottom-box" ).prepend(newCard(cardData.id, cardData.title, cardData.body, cardData.quality));
+        $( ".bottom-box" ).prepend(newCard(cardData.id, cardData.title, cardData.body, cardData.importance));
     }
     }
 }
@@ -43,12 +43,12 @@ function createCard(event) {
     var title = $('#title-input').val();
     var body = $('#body-input').val();
     var newTask = createTask(title, body);
-    $( ".bottom-box" ).prepend(newCard(newTask.id, title, body, newTask.quality));
+    $( ".bottom-box" ).prepend(newCard(newTask.id, title, body, newTask.importance));
     clearInputs();
 }
 
-function newCard(id , title , body, quality, highlight) {
-    var qualityOptions = ['none','low','normal','high','critical'];
+function newCard(id , title , body, importance, highlight) {
+    var importanceOptions = ['none','low','normal','high','critical'];
     var className = 'card-container'
     if (highlight) {
         className += ' completed-task';
@@ -60,7 +60,7 @@ function newCard(id , title , body, quality, highlight) {
              ${body}</p>
              <button class="upvote card-Btn"></button> 
              <button class="downvote card-Btn"></button> 
-             <p class="quality" data-number="0">importance: ${qualityOptions[quality]}</p>
+             <p class="importance" data-number="0">importance: ${importanceOptions[importance]}</p>
             <button class="complete-btn">Complete</button>
              </div>`;
 }
@@ -84,7 +84,7 @@ function showCompleted(){
     for (var i = 0; i < localStorage.length; i++) {
     var cardData = JSON.parse(localStorage.getItem(localStorage.key(i)));
     if(cardData.completed === true){
-        $( ".bottom-box" ).prepend(newCard(cardData.id, cardData.title, cardData.body, cardData.quality, true));
+        $( ".bottom-box" ).prepend(newCard(cardData.id, cardData.title, cardData.body, cardData.importance, true));
     }
     }
 }
@@ -92,10 +92,10 @@ function showCompleted(){
 function upVoting() {
     if ($(event.target).hasClass('upvote')) {
     var cardObject = JSON.parse(localStorage.getItem($(event.target).parent().prop('id')));
-    if ($(event.target).hasClass('upvote') && cardObject.quality < 4) {
-       cardObject.quality++; 
+    if ($(event.target).hasClass('upvote') && cardObject.importance < 4) {
+       cardObject.importance++; 
     } 
-    $( ".bottom-box" ).prepend(newCard(cardObject.id, cardObject.title, cardObject.body, cardObject.quality));
+    $( ".bottom-box" ).prepend(newCard(cardObject.id, cardObject.title, cardObject.body, cardObject.importance));
     localStoreCard(cardObject.id, cardObject); 
     $(event.target).parent().remove();  
     }
@@ -104,10 +104,10 @@ function upVoting() {
 function downVoting(){
     if ($(event.target).hasClass('downvote')) {
     var cardObject = JSON.parse(localStorage.getItem($(event.target).parent().prop('id')));
-    if ($(event.target).hasClass('downvote') && cardObject.quality > 0) {
-        cardObject.quality--;
+    if ($(event.target).hasClass('downvote') && cardObject.importance > 0) {
+        cardObject.importance--;
     }
-    $( ".bottom-box" ).prepend(newCard(cardObject.id, cardObject.title, cardObject.body, cardObject.quality));
+    $( ".bottom-box" ).prepend(newCard(cardObject.id, cardObject.title, cardObject.body, cardObject.importance));
     localStoreCard(cardObject.id, cardObject); 
     $(event.target).parent().remove();  
     }

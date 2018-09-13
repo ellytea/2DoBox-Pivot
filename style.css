@@ -111,14 +111,10 @@ button {
     background: #c7edeb;
 }
 
-.quality {
+.importance {
     display: inline;
     font-family: serif;
     margin-left: 15px;
-}
-
-.qualityVariable {
-    font-family: 'Open Sans', sans-serif;
 }
 
 .card-Btn {
