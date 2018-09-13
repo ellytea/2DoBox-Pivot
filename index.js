@@ -47,9 +47,13 @@ function createCard(event) {
     clearInputs();
 }
 
-function newCard(id , title , body, quality) {
+function newCard(id , title , body, quality, highlight) {
     var qualityOptions = ['none','low','normal','high','critical'];
-    return `<div id="${id}" class="card-container"> 
+    var className = 'card-container'
+    if (highlight) {
+        className += ' completed-task';
+    }
+    return `<div id="${id}" class="${className}"> 
             <h2 class="title-of-card" contenteditable="true">${title}</h2>
             <button class="delete-button card-Btn"></button>
             <p class="body-of-card" contenteditable="true">
@@ -80,7 +84,7 @@ function showCompleted(){
     for (var i = 0; i < localStorage.length; i++) {
     var cardData = JSON.parse(localStorage.getItem(localStorage.key(i)));
     if(cardData.completed === true){
-        $( ".bottom-box" ).prepend(newCard(cardData.id, cardData.title, cardData.body, cardData.quality));
+        $( ".bottom-box" ).prepend(newCard(cardData.id, cardData.title, cardData.body, cardData.quality, true));
     }
     }
 }

@@ -100,9 +100,11 @@ button {
 }
 
 .show-completed {
-    background: #d1d3d4;
+    color: #fff;
+    border-radius: 50px;
+    background: #404040;
     margin: 20px auto 10px auto;
-    font-size: 1em;
+    font-size: 1.2em;
 }
 
 .completed-task {
